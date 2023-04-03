@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /** 
+         *  封装一个函数 sendAJAX 发送 GET AJAX 请求
+         *  参数 URL
+         *  返回结果 Promise对象
+         */
+        // var XMLHttpRequest = require('xhr2');
+        function sendAJAX(url) {
+            return new Promise((resolve, reject) => {
+                // 创建xhr对象
+                
+                const xhr = new XMLHttpRequest()
+                xhr.responseType = 'json';
+                // 初始化
+                xhr.open("GET", url)
+                // 发送
+                xhr.send();
+                // 处理结果
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        // 判断成功
+                        if (xhr.status >= 200 && xhr.status <= 300) {
+                            resolve(xhr.response)
+                        } else {
+                            reject(xhr.status)
+                        }
+
+                    }
+                }
+            })
+        }
+
+        sendAJAX('https://api.apiopen.top/getSingleJoke')
+            .then(value => {
+                console.log(value)
+            }, reason => {
+                console.warn(reason)
+            })
+    </script>
+</body>
+
+</html>
