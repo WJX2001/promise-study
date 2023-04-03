@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./promise.js"></script>
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            // setTimeout(() => {      // 当为异步任务的时候，执行回调的时机是改变状态之后，才会执行，所以要将回调任务放在reject，resolve函数中，
+            //     // 同步任务的时候，执行回调的时机是.then之后
+            //     // resolve('OK')
+            //     reject('err')
+            // },1000)
+            resolve('ok') 
+            // reject('error')
+            // 抛出异常
+            // throw "error"
+        })
+        // 执行then 方法
+        const res = p.then(value => {
+            // 抛出异常
+            throw "Fail"
+        },reason => {
+            console.warn(reason)
+        })
+        
+        console.log(res)
+
+    </script>
+</body>
+
+</html>
